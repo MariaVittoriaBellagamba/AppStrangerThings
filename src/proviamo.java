@@ -8,7 +8,9 @@ public class proviamo {
 	}
 	
 	public int add(int a, int b) { 
+		System.out.print("Ciao");
 		return (a+b);
 	}
+	
 
 }
