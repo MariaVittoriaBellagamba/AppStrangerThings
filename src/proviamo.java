@@ -10,7 +10,7 @@ public class proviamo {
 	}
 	
 	public static int add(int a, int b) { 
-		System.out.print("Ciao");
+		System.out.print("Ciao " + 3);
 		return (a+b);
 	}
 	
