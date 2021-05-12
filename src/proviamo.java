@@ -11,6 +11,7 @@ public class proviamo {
 	
 	public static int add(int a, int b) { 
 		System.out.print("Ciao " + 10);
+		System.out.println("cacca");
 		return (a+b);
 	}
 	
