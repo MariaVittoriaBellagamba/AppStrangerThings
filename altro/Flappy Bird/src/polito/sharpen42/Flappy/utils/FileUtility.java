@@ -1,0 +1,23 @@
+package polito.sharpen42.Flappy.utils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileUtility {
+	private FileUtility() {}
+	
+	public static String loadAsString(String file) {
+		StringBuilder result = new StringBuilder();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String buffer = "";
+			while((buffer = reader.readLine()) != null) {
+				
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return result.toString();
+	}
+}
