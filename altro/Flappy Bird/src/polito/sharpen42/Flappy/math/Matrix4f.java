@@ -14,23 +14,20 @@ public class Matrix4f {
 	
 	public static Matrix4f identity() {
 		Matrix4f result = new Matrix4f();
-		for(int i = 0; i < SIZE; i++) {
-			if(i % 5 == 0) result.elements[i] = 1.0f;
-			else result.elements[i] = 0.0f;
-		}
+		for(int i = 0; i < SIZE; result.elements[i] = 1.0f, i+=5);
 		return result;
 	}
 	
 	static public Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far) {
 		Matrix4f result = identity();
 		
-		result.elements[0 + 0 * 4] = 2.0f / (right-left);
-		result.elements[1 + 0 * 4] = 2.0f / (top-bottom);
-		result.elements[2 + 0 * 4] = 2.0f / (near-far);
+		result.elements[0 + 0 * 4] = 2.0f / (right - left);
+		result.elements[1 + 1 * 4] = 2.0f / (top - bottom);
+		result.elements[2 + 2 * 4] = 2.0f / (near - far);
 		
-		result.elements[0 + 3 * 4]=(left + right)/(left - right);
-		result.elements[1 + 3 * 4]=(top + bottom)/(bottom - top);
-		result.elements[2 + 3 * 4]=(far + near)/(far - near);
+		result.elements[0 + 3 * 4]= (left + right)/(left - right);
+		result.elements[1 + 3 * 4]= (bottom + top)/(bottom - top);
+		result.elements[2 + 3 * 4]= (far + near)/(far - near);
 		
 		return result;
 	}
@@ -56,6 +53,11 @@ public class Matrix4f {
 		
 		result.elements[0 + 1 * 4] = -sin;
 		result.elements[1 + 1 * 4] = cos;
+		
+		/* cos 	sin 0
+		 * -sin cos 0
+		 * 0 	0 	1
+		 * */
 		
 		return result;
 	}

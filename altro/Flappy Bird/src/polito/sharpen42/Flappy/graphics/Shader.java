@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Shader {
+	// gli attributi sono settati pe rogni singolo vertice
 	public static final int VERTEX_ATTRIB = 0;
-	public static final int TCOORD_ATTRIB = 0;
+	public static final int TCOORD_ATTRIB = 1;
 	
 	public static Shader BACKGROUND;
 	
@@ -26,6 +27,9 @@ public class Shader {
 	}
 	
 	public int getUniform(String name) {
+		if(locationCache.containsKey(name))
+			return locationCache.get(name);
+		// le variabili Uniform permettono di passare dati dalla CPU alla GPU
 		// si cerca di ottimizzare il programma limitando lo scambio di informazioni fra CPU e GPU, molto lento.
 		int result = glGetUniformLocation(ID, name);
 		// le posizioni vengono memorizzate in 'locationCache' in modo da non dover cercare i file ogni volta
@@ -61,7 +65,7 @@ public class Shader {
 	}
 	
 	public void disable() {
-		glUseProgram(ID);
+		glUseProgram(0);
 	}
 
 }

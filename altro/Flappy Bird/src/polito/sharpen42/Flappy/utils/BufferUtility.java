@@ -1,9 +1,6 @@
 package polito.sharpen42.Flappy.utils;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import java.nio.*;
 
 public class BufferUtility {
 	private BufferUtility() {}
