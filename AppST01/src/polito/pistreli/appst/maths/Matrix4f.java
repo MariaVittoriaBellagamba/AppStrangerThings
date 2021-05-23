@@ -18,7 +18,7 @@ public class Matrix4f {
 		return result;
 	}
 	
-	static public Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far) {
+	public static Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far) {
 		Matrix4f result = identity();
 		
 		// diagonale
@@ -34,7 +34,9 @@ public class Matrix4f {
 		return result;
 	}
 	
-	
+	public static Matrix4f perspective() {
+		return identity();
+	}
 	
 	public static Matrix4f translate(Vector3f vector) {
 		Matrix4f result = identity();
