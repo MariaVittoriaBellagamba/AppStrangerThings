@@ -8,49 +8,49 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl.jar" sourcepath="lib/lwjgl-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-assimp.jar" sourcepath="lib/lwjgl-assimp-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-assimp-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-glfw.jar" sourcepath="lib/lwjgl-glfw-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/lwjgl-glfw-sources.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-glfw-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-openal.jar" sourcepath="lib/lwjgl-openal-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-openal-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/lwjgl-openal-sources.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-opengl.jar" sourcepath="lib/lwjgl-opengl-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-opengl-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-opengl-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-stb.jar" sourcepath="lib/lwjgl-stb-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-stb-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-stb-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-vulkan.jar" sourcepath="lib/lwjgl-vulkan-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-vulkan-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-vulkan-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/lwjgl-vma.jar" sourcepath="lib/lwjgl-vma-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Stefano/Documents/Eclipse%20Workspace/AppST01/lib/javadoc/lwjgl-vma-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/AppST01/lib/javadoc/lwjgl-vma-javadoc.jar!/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="AppST01/lib/natives"/>
 		</attributes>
 	</classpathentry>

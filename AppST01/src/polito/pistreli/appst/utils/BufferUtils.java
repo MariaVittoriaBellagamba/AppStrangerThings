@@ -3,6 +3,7 @@ package polito.pistreli.appst.utils;
 import java.nio.*;
 
 public class BufferUtils {
+	private BufferUtils() {}
 	
 	public static ByteBuffer createByteBuffer(byte[] array) {
 		ByteBuffer result = ByteBuffer.allocateDirect(array.length);
