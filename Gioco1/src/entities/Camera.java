@@ -6,9 +6,9 @@ import org.lwjgl.util.vector.Vector3f;
 public class Camera {
 	
 	private Vector3f position = new Vector3f(0, 0, 0);
-	private float pitch;
-	private float yaw;
-	private float roll;
+	private float pitch = 0f;
+	private float yaw = 0f;
+	private float roll = 0f;
 	
 	public Camera() {
 	}
@@ -16,24 +16,45 @@ public class Camera {
 	public void move() {
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			position.z -= 0.05;
+			float y = (float) Math.toRadians(yaw);
+			System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			position.x -= (float) (-.5f * Math.sin(y));
+			position.z -= (float) (.5f * Math.cos(y));
+			System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			position.z += 0.05;
+			float y = (float) Math.toRadians(yaw);
+			System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			position.x += (float) (-.5f * Math.sin(y));
+			position.z += (float) (.5f * Math.cos(y));
+			System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			position.x += 0.05;
+		/*if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
+			position.x += 0.5;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			position.x -= 0.05;
+			position.x -= 0.5;
+		}*/
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			pitch += 0.5;
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_E)) {
-			position.y += 0.05;
+		if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			pitch -= 0.5;
 		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-			position.y -= 0.05;
+		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+			yaw += 0.5;
+			System.out.println("yaw: " + yaw);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+			yaw -= 0.5;
+			System.out.println("yaw: " + yaw);
 		}
 	}
+	
+	// cos(t) cos(p)
+	// sin(t) cos(p)
+	// -sin(t)
+	// i
 	
 	public Vector3f getPosition() {
 		return position;
