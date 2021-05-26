@@ -35,20 +35,21 @@ public class MainGameLoop {
 		
 		Loader loader = new Loader();
 
-		RawModel model = OBJLoader.loadObjModel("cube", loader);
+		RawModel model = OBJLoader.loadObjModel("cubeFlowers4", loader);
 
-		//TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("white")));
-		TexturedModel cubeModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("white")));
+		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("image")));
+		//TexturedModel cubeModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("white")));
 
-		//ModelTexture texture = staticModel.getTexture();
-		//texture.setShineDamper(10);
+		ModelTexture texture = staticModel.getTexture();
+		texture.setShineDamper(10);
 		//texture.setReflectivity(1);
+	
 		
-		//Entity entity = new Entity(staticModel, new Vector3f(0,0,-50),0,0,0,1);
+		Entity entity = new Entity(staticModel, new Vector3f(0,-20,-50),0,90,0,10);
 		Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,1,1));
 		Camera camera = new Camera();
 
-		List<Entity> allCubes = new ArrayList<Entity>();
+		/*List<Entity> allCubes = new ArrayList<Entity>();
 		Random random = new Random();
 		
 		for(int i=0; i < 200; i++) {
@@ -57,7 +58,7 @@ public class MainGameLoop {
 			float z =  random.nextFloat() * -300;
 			allCubes.add(new Entity(cubeModel, new Vector3f(x, y, z), random.nextFloat()*180f, random.nextFloat()*180f, 0f, 1f));
 
-		}
+		}*/
 		
 		MasterRenderer renderer = new MasterRenderer();
 		while(!Display.isCloseRequested()) {
@@ -66,10 +67,14 @@ public class MainGameLoop {
 			camera.move();
 			
 			
-			for(Entity cube:allCubes) {
+			/*for(Entity cube:allCubes) {
 				cube.increaseRotation(0, 1, 0);
 				renderer.processEntity(cube);
-			}
+			}*/
+			
+			renderer.processEntity(entity);
+			
+			
 			renderer.render(light, camera);
 			DisplayManager.updateDisplay();
 		}

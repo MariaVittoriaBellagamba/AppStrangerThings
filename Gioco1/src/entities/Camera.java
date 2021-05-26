@@ -29,12 +29,7 @@ public class Camera {
 			position.z += (float) (.5f * Math.cos(y));
 			System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
 		}
-		/*if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			position.x += 0.5;
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			position.x -= 0.5;
-		}*/
+		
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 			pitch += 0.5;
 		}
@@ -50,11 +45,6 @@ public class Camera {
 			System.out.println("yaw: " + yaw);
 		}
 	}
-	
-	// cos(t) cos(p)
-	// sin(t) cos(p)
-	// -sin(t)
-	// i
 	
 	public Vector3f getPosition() {
 		return position;
