@@ -35,9 +35,9 @@ public class MainGameLoop {
 		
 		Loader loader = new Loader();
 
-		RawModel model = OBJLoader.loadObjModel("cubeFlowers4", loader);
+		RawModel model = OBJLoader.loadObjModel("stanzaLowPolyParent", loader);
 
-		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("image")));
+		TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("stanzaTexture")));
 		//TexturedModel cubeModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("white")));
 
 		ModelTexture texture = staticModel.getTexture();
@@ -45,7 +45,7 @@ public class MainGameLoop {
 		//texture.setReflectivity(1);
 	
 		
-		Entity entity = new Entity(staticModel, new Vector3f(0,-20,-50),0,90,0,10);
+		Entity entity = new Entity(staticModel, new Vector3f(0,0,-50),0,90,0,10);
 		Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,1,1));
 		Camera camera = new Camera();
 
@@ -73,7 +73,7 @@ public class MainGameLoop {
 			}*/
 			
 			renderer.processEntity(entity);
-			
+			entity.increaseRotation(0, 1, 0);
 			
 			renderer.render(light, camera);
 			DisplayManager.updateDisplay();
