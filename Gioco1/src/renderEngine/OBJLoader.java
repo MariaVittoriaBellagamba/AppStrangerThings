@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -31,43 +28,63 @@ public class OBJLoader {
 		BufferedReader reader = new BufferedReader(fr);
 		String line;
 		
-		List<Float> verticesArray = new ArrayList<Float>();
-		List<Float> normalsArray = new ArrayList<Float>();
-		List<Float> textureArray = new ArrayList<Float>();
-		List<Integer> indicesArray = new ArrayList<Integer>();
+		float[] verticesArray = new float[65536]; // 2^16
+		float[] normalsArray = new float[65536];
+		float[] textureArray = new float[65536];
+		int[] indicesArray = new int[65536];
+		
+		int totalVertices = 0;
+		int totalTextures = 0;
+		int totalIndices = 0;
 		
 		try { 
-			String nameO;  
-			while(!(line = reader.readLine()).startsWith("o "));
-			String[] words = line.split(" ");
-			nameO = words[1]; //nome primo oggetto
+//			String nameO;  
+//			while(!(line = reader.readLine()).startsWith("o "));
+//			String[] words = line.split(" ");
+//			nameO = words[1]; //nome primo oggetto
+//			
+//			Mesh mesh = new Mesh(nameO); 
+//			objects.put(nameO, mesh); //inserimento primo oggetto
+			Mesh mesh = null;
 			
-			Mesh mesh = new Mesh(nameO); 
-			objects.put(nameO, mesh); //inserimento primo oggetto
-			
-			while((line = reader.readLine())!= null) {
-				String[] currentLine = line.split(" ");
+			while((line = reader.readLine()) != null) {
+				String[] currentLine;
 				
-				if(line.startsWith("v ")) {
+				if(line.startsWith("o ")) {
+					currentLine = line.split(" ");	
+					String name1 = currentLine[1];
+					objects.put(name1, new Mesh(name1));
+					mesh = objects.get(name1);
+					line = reader.readLine();
+				}
+				
+				while(line != null && line.startsWith("v ")) {
+					currentLine = line.split(" ");
 					Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]), Float.parseFloat(currentLine[3]));
 					mesh.addVertex(vertex);
-				} else if(line.startsWith("vt ")) {
+					totalVertices++;
+					line = reader.readLine();
+				}
+				
+				while(line != null && line.startsWith("vt ")) {
+					currentLine = line.split(" ");
 					Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]));
 					mesh.addTexture(texture);
-					
-				}else if(line.startsWith("vn ")) {
+					totalTextures++;
+					line = reader.readLine();
+				} 
+				
+				while(line != null && line.startsWith("vn ")) {
+					currentLine = line.split(" ");
 					Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]), Float.parseFloat(currentLine[3]));
 					mesh.addNormal(normal);
-					
-				}else if(line.startsWith("o ")) {
-					String name1 = currentLine[1];
-					mesh = new Mesh(name1);
-					objects.put(name1, mesh);
-					
-				}else if(line.startsWith("f ")) {
-					currentLine = line.split(" ");
+					line = reader.readLine();					
+				}
 				
-					String[] vertex1 = currentLine[1].split("/"); //[Vi, Ti, Ni]
+				while(line != null && line.startsWith("f ")) {
+					currentLine = line.split(" ");
+					//[Vi, Ti, Ni]
+					String[] vertex1 = currentLine[1].split("/");
 					String[] vertex2 = currentLine[2].split("/");
 					String[] vertex3 = currentLine[3].split("/");
 					
@@ -76,114 +93,49 @@ public class OBJLoader {
 					processVertex(vertex3, mesh, textureArray, normalsArray);
 					
 					line = reader.readLine();
-					
-				}	
-			}
-			
-			/* while(true) {
-				line = reader.readLine();
-				String[] currentLine = line.split(" ");
-				
-				if(line.startsWith("v ")) {
-					Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]), Float.parseFloat(currentLine[3]));
-					vertices.add(vertex);
-					
-				} else if(line.startsWith("vt ")) {
-					Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]));
-					textures.add(texture);
-					
-				}else if(line.startsWith("vn ")) {
-					Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]), Float.parseFloat(currentLine[3]));
-					normals.add(normal);
-					
-				}else if(line.startsWith("f ")) {
-					textureArray = new float[vertices.size()*2];
-					normalsArray = new float[vertices.size()*3];
-					break;
-					
 				}
 			}
-			
-			while(line != null) {
-				if (!line.startsWith("f ")) {
-					line = reader.readLine();
-					continue;
-				}
-				String[] currentLine = line.split(" ");
-				String[] vertex1 = currentLine[1].split("/"); //[Vi, Ti, Ni]
-				String[] vertex2 = currentLine[2].split("/");
-				String[] vertex3 = currentLine[3].split("/");
-				
-				processVertex(vertex1, indices, textures, normals, textureArray, normalsArray);
-				processVertex(vertex2, indices, textures, normals, textureArray, normalsArray);
-				processVertex(vertex3, indices, textures, normals, textureArray, normalsArray);
-				line = reader.readLine();
-				
-			} */
-			
-		reader.close();
-			
-		}catch(Exception e) {
+			reader.close();
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		for(Mesh m : objects.values()) {
-			int vertexPointer = 0;
+		
+		int currentVertex = 0;
+		int currentTexture = 0;
+		int currentNormal = 0;
+		for(Mesh m : objects.values()) {			
 			for(Vector3f vertex: m.getVertices()) {
-				verticesArray.add(vertex.x);
-				verticesArray.add(vertex.y);
-				verticesArray.add(vertex.z);
+				verticesArray[currentVertex++] = vertex.x;
+				verticesArray[currentVertex++] = vertex.y;
+				verticesArray[currentVertex++] = vertex.z;
 			}
-			for(int i=0; i< m.getIndices().size(); i++) {
-				indicesArray.add(i,m.getIndices().get(i));
+			for(int i = 0; i < m.getIndices().size(); i++) {
+				indicesArray[totalIndices + i] = m.getIndices().get(i); // qua vengono assegnati gli indici
 			}
+			totalIndices += m.getIndices().size();
 			
 		}
-		
-		float[] va = new float[verticesArray.size()];
-		float[] tc = new float[textureArray.size()];
-		float[] vn = new float[normalsArray.size()];
-		int[] id = new int[indicesArray.size()];
-		
-		int i=0; 
-		for( float elem : verticesArray ) {
-			va[i] = elem; 
-			i++;
-		}
-		
-		i=0; 
-		for( float elem : textureArray ) {
-			tc[i] = elem; 
-			i++;
-		}
-		
-		i=0; 
-		for( float elem : normalsArray ) {
-			vn[i] = elem; 
-			i++;
-		}
-		
-		i=0; 
-		for( int elem : indicesArray ) {
-			id[i] = elem; 
-			i++;
-		}
-		
-		return loader.loadToVAO( va, tc, vn, id);
+		// verticesArray = Arrays.copyOfRange(verticesArray, 0, totalVertices * 3);
+		// textureArray = Arrays.copyOfRange(textureArray, 0, totalVertices * 2);
+		// normalsArray = Arrays.copyOfRange(normalsArray, 0, totalVertices * 3);
+		// indicesArray = Arrays.copyOfRange(indicesArray, 0, totalVertices * 3);
+		return loader.loadToVAO(Arrays.copyOfRange(verticesArray, 0, totalVertices * 3), 
+								Arrays.copyOfRange(textureArray, 0, totalTextures * 2), 
+								Arrays.copyOfRange(normalsArray, 0, totalVertices * 3), 
+								Arrays.copyOfRange(indicesArray, 0, totalIndices));
 	}
 	
-	private static void processVertex(String[] vertexData, Mesh object, List<Float> textureArray, List<Float> normalsArray) {
+	private static void processVertex(String[] vertexData, Mesh mesh, float[] textureArray, float[] normalsArray) {
 		
-		int currentVertexPointer = Integer.parseInt(vertexData[0]) -1;
-		object.getIndices().add(currentVertexPointer);
-		Vector2f currentTex = object.getTextures().get(Integer.parseInt(vertexData[1])-1);
-		textureArray.add(currentVertexPointer*2, currentTex.x);
-		textureArray.add(currentVertexPointer*2+1, 1 - currentTex.y);
-		Vector3f currentNorm = object.getNormals().get(Integer.parseInt(vertexData[2])-1);
-		normalsArray.add(currentVertexPointer*3, currentNorm.x);
-		normalsArray.add(currentVertexPointer*3+1, currentNorm.y);
-		normalsArray.add(currentVertexPointer*3+2, currentNorm.z);
-
-
+		int currentVertexPointer = Integer.parseInt(vertexData[0]) - 1;
+		mesh.addIndex(currentVertexPointer);
+		Vector2f currentTex = mesh.getTextures().get(Integer.parseInt(vertexData[1]) - 1);
+		textureArray[currentVertexPointer * 2] = currentTex.x;
+		textureArray[currentVertexPointer * 2 + 1] = 1 - currentTex.y;
+		Vector3f currentNorm = mesh.getNormals().get(Integer.parseInt(vertexData[2]) - 1);
+		normalsArray[currentVertexPointer * 3] = currentNorm.x;
+		normalsArray[currentVertexPointer * 3 + 1] = currentNorm.y;
+		normalsArray[currentVertexPointer * 3 + 2] = currentNorm.z;
 	}
 }
 	

@@ -14,20 +14,43 @@ public class Camera {
 	}
 
 	public void move() {
-		
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
+			float ds = .8f;
 			float y = (float) Math.toRadians(yaw);
-			System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
-			position.x -= (float) (-.5f * Math.sin(y));
-			position.z -= (float) (.5f * Math.cos(y));
-			System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			//System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			position.x -= (float) (-ds * Math.sin(y));
+			position.z -= (float) (ds * Math.cos(y));
+			//System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_S)) {
+			float ds = .8f;
 			float y = (float) Math.toRadians(yaw);
-			System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
-			position.x += (float) (-.5f * Math.sin(y));
-			position.z += (float) (.5f * Math.cos(y));
-			System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			//System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			position.x += (float) (-ds * Math.sin(y));
+			position.z += (float) (ds * Math.cos(y));
+			//System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
+			float ds = .8f;
+			float y = (float) Math.toRadians(yaw);
+			//System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			position.x -= (float) (ds * Math.cos(y));
+			position.z -= (float) (ds * Math.sin(y));
+			//System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
+			float ds = .8f;
+			float y = (float) Math.toRadians(yaw);
+			//System.out.println("prima = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+			position.x += (float) (ds * Math.cos(y));
+			position.z += (float) (ds * Math.sin(y));
+			//System.out.println("dopo = yaw: " + yaw + ", x: " + position.x + ", z: " + position.z);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_Q)) {
+			position.y += .8f;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_E)) {
+			position.y -= .8f;
 		}
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
@@ -42,7 +65,7 @@ public class Camera {
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 			yaw -= 0.5;
-			System.out.println("yaw: " + yaw);
+			//System.out.println("yaw: " + yaw);
 		}
 	}
 	
